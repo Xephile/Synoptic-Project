@@ -1,6 +1,6 @@
 import Filters from "../Components/Filters";
 import Footer from "./Footer";
-import AllItems from "../Components/AllItems";
+import AllItems from "../Components/Items/AllItems";
 import { useEffect, useState } from "react";
 
 const MainBody = (props: any) => {
@@ -25,7 +25,7 @@ const MainBody = (props: any) => {
             id: key,
             ...data[key],
           };
-          if (file.name == null) continue
+          if (file.name === null) continue
           files.push(file);
         }
 
@@ -36,18 +36,18 @@ const MainBody = (props: any) => {
   }, []);
 
   function filterFootage() {
-    setFilteredFiles(loadedFiles.filter((element: any) => element.type == "mp4"))
+    setFilteredFiles(loadedFiles.filter((element: any) => element.type === "mp4"))
     setFilteredFilesConfig("footage");
-    if (filteredFilesConfig == "footage") {
+    if (filteredFilesConfig === "footage") {
       setFilteredFiles(loadedFiles);
       setFilteredFilesConfig("");
     }
   }
 
   function filterAudio() {
-    setFilteredFiles(loadedFiles.filter((element: any) => element.type == "mp3"))
+    setFilteredFiles(loadedFiles.filter((element: any) => element.type === "mp3"))
     setFilteredFilesConfig("audio");
-    if (filteredFilesConfig == "audio") {
+    if (filteredFilesConfig === "audio") {
       setFilteredFiles(loadedFiles);
       setFilteredFilesConfig("");
     }
@@ -84,15 +84,17 @@ const MainBody = (props: any) => {
 
               <div className="p-3 row">
                 <div className="col-10 d-flex">
-                  <h3 className="pe-4"><a href="#" className="text-black" onClick={filterFootage}>Footage</a></h3>
-                  <h3 className="pe-4"><a href="#" className="text-black" onClick={filterAudio}>Audio</a></h3>
-                  <h3 className="pe-4"><a href="#" className="text-black">Your playlists</a></h3>
+                  <h3 className="pe-4"><a href="#/" className="text-black" onClick={filterFootage}>Footage</a></h3>
+                  <h3 className="pe-4"><a href="#/" className="text-black" onClick={filterAudio}>Audio</a></h3>
+                  <h3 className="pe-4"><a href="#/" className="text-black">Your playlists</a></h3>
 
                   <input
                     placeholder="Search"
                     type="text"
-                    className="form-control form-control-sm w-25"
+                    className="form-control form-control-sm w-25 me-2"
                   />
+
+                  <button className="btn btn-dark px-4">Search</button>
                 </div>
                 <div className="col">
                   <select

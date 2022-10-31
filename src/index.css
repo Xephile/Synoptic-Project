@@ -38,6 +38,7 @@ code {
 .selectedItem {
   z-index: 100;
   position: fixed;
+  width: 50vw;
   top: 10vh;
   left: 25%;
 }

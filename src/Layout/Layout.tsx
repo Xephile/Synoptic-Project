@@ -1,5 +1,5 @@
-import Header from "../Components/Header";
-import Navbar from "../Components/Navbar";
+import Header from "./Header";
+import Navbar from "./Navbar";
 
 const Layout = (props: any) => {
   return (
