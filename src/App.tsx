@@ -1,11 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import MainBody from "./Layout/MainBody";
 import Layout from "./Layout/Layout";
+import { Route, Routes } from "react-router-dom";
 
-function App() {
+
+function App(): JSX.Element {
   return (
     <Layout>
-      <MainBody></MainBody>
+      <Routes>
+        <Route element={<MainBody />} path="/" />
+      </Routes>
     </Layout>
   );
 }

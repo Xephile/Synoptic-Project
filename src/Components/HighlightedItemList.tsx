@@ -15,7 +15,6 @@ const HighlitedItemList: React.FC<IItem> = (props: any) => {
     setItemSelected(true);
     setSelectedItem(props.items.find((element: any) => element.id == id));
   }
-  console.log(selectedItem)
 
   function closeItem() {
     setItemSelected(false);
@@ -26,7 +25,7 @@ const HighlitedItemList: React.FC<IItem> = (props: any) => {
 
       <ul className="list-unstyled d-flex">
         {props.items.map((item: any) => (
-          <li className="p-3">
+          <li className="p-3" key={item.id}>
             <button onClick={() => openItem(item.id)} className="border-0 bg-light">
               <Item
                 image={item.image.path}

@@ -1,4 +1,4 @@
-import { db } from "../firebase"
+import { useNavigate } from "react-router-dom";
 
 interface ISelectedItem {
     image: any;
@@ -10,6 +10,8 @@ interface ISelectedItem {
 }
 
 const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
+    const history = useNavigate();
+
 
     function deleteHandler() {
         fetch(
@@ -21,7 +23,9 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
                     "Content-Type": "application/json",
                 },
             }
-        );
+        ).then(() => {
+            history("/")
+        });
         console.log(props.id)
     }
 
