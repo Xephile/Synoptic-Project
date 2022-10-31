@@ -1,16 +1,6 @@
 const Footer = () => {
   return (
     <footer className="bg-dark d-flex justify-content-evenly py-5">
-      {/* <div className="d-flex flex-col">
-        <ul className="list-unstyled underline text-white">
-          <li>
-            <a href="#">Terms and Conditions</a>
-          </li>
-          <li>
-            <a href="#">Terms and Conditions</a>
-          </li>
-        </ul>
-      </div> */}
 
       <div className="d-flex flex-column">
         <section className="w-25">

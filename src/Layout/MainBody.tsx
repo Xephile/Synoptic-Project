@@ -1,117 +1,33 @@
 import Filters from "../Components/Filters";
-import RecommendedItemList from "../Components/RecommendedItemList";
-import ItemList from "../Components/ItemList";
 import Footer from "./Footer";
-
-const recommendedDummyData = [
-  {
-    title: "City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.24",
-  },
-  {
-    title: "Other City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.25",
-  },
-];
-
-const dummyData = [
-  {
-    title: "City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.24",
-  },
-  {
-    title: "Other City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.25",
-  },
-  {
-    title: "City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.24",
-  },
-  {
-    title: "Other City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.25",
-  },
-  {
-    title: "City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.24",
-  },
-  {
-    title: "Other City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.25",
-  },
-  {
-    title: "City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.24",
-  },
-  {
-    title: "Other City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.25",
-  },
-  {
-    title: "City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.24",
-  },
-  {
-    title: "Other City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.25",
-  },
-  {
-    title: "City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.24",
-  },
-  {
-    title: "Other City",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    time: "0.25",
-  },
-];
+import AllItems from "../Components/AllItems";
 
 const MainBody = () => {
+
   return (
     <>
       <div className="row bg-light">
+
+        {/* Show company name*/}
+        <div className="ms-4 mb-4">
+          <h4 className="border-bottom border-black border-3 w-25 ms-5 mt-4 pb-3">Whizzy Software</h4>
+          <h1 className="ms-5"><i>your company name</i></h1>
+        </div>
+
         {/* Filters */}
         <div className="row p-0">
-          <div className="col-sm-3 p-0 ps-5 pt-3 bg-white shadow">
+          <div className="col-sm-3 p-0 ps-5 ms-3 pt-3">
             <Filters />
           </div>
           {/* Main Body */}
           <div className="col p-0">
             <div>
-              <div className="bg-dark d-flex p-2">
-                <h4 className="text-white px-3 border-end border-2">Footage</h4>
-                <h4 className="text-white px-3">Music</h4>
-              </div>
+
               <div className="p-3 row">
                 <div className="col-10 d-flex">
-                  <h2 className="pe-3">Recommended</h2>
+                  <h3 className="pe-4"><a href="#" className="text-black">Footage</a></h3>
+                  <h3 className="pe-4"><a href="#" className="text-black">Audio</a></h3>
+                  <h3 className="pe-4"><a href="#" className="text-black">Your playlists</a></h3>
 
                   <input
                     placeholder="Search"
@@ -121,7 +37,7 @@ const MainBody = () => {
                 </div>
                 <div className="col">
                   <select
-                    className="form-select form-select-md w-50"
+                    className="form-select form-select-md w-75"
                     name="sort"
                     id="sort"
                   >
@@ -132,10 +48,7 @@ const MainBody = () => {
                 </div>
               </div>
             </div>
-            <RecommendedItemList items={recommendedDummyData} />
-            <div>
-              <ItemList items={dummyData} />
-            </div>
+            <AllItems />
           </div>
         </div>
       </div>

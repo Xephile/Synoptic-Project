@@ -9,8 +9,8 @@ const ItemList: React.FC<IItem> = (props: any) => {
     <div>
       <ul className="list-unstyled d-flex flex-wrap">
         {props.items.map((item: any) => (
-          <li className="p-4 w-25">
-            <Item image={item.image} title={item.title} time={item.time} />
+          <li className="p-3 w-25">
+            <Item image={item.image.path} title={item.name} time={item.time} comment={item.comment} type={item.type} id={item.id} />
           </li>
         ))}
       </ul>
