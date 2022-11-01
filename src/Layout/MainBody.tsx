@@ -5,14 +5,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Playlists from "../Components/Playlists/Playlists";
 
-const MainBody = (props: any) => {
+const MainBody = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedFiles, setLoadedFiles] = useState<string[]>([]);
   const [loadedPlaylists, setLoadedPlaylists] = useState<string[]>([]);
   const [filteredFiles, setFilteredFiles] = useState<string[]>([]);
   const [filteredFilesConfig, setFilteredFilesConfig] = useState("All Files");
-  const highlight = "text-white";
-
 
   // Get Data
   useEffect(() => {
