@@ -1,14 +1,20 @@
-import Filters from "../Components/Filters";
+import Filters from "./Filters";
 import Footer from "./Footer";
 import AllItems from "../Components/Items/AllItems";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Playlists from "../Components/Playlists/Playlists";
 
 const MainBody = (props: any) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedFiles, setLoadedFiles] = useState<string[]>([]);
+  const [loadedPlaylists, setLoadedPlaylists] = useState<string[]>([]);
   const [filteredFiles, setFilteredFiles] = useState<string[]>([]);
-  const [filteredFilesConfig, setFilteredFilesConfig] = useState("");
+  const [filteredFilesConfig, setFilteredFilesConfig] = useState("All Files");
+  const highlight = "text-white";
 
+
+  // Get Data
   useEffect(() => {
     setIsLoading(true);
     fetch(
@@ -35,26 +41,42 @@ const MainBody = (props: any) => {
       });
   }, []);
 
+  // Filter Files to only show footage
   function filterFootage() {
     setFilteredFiles(loadedFiles.filter((element: any) => element.type === "mp4"))
-    setFilteredFilesConfig("footage");
-    if (filteredFilesConfig === "footage") {
+    setFilteredFilesConfig("Footage");
+    if (filteredFilesConfig === "Footage") {
       setFilteredFiles(loadedFiles);
-      setFilteredFilesConfig("");
+      setFilteredFilesConfig("All Files");
     }
   }
 
+  // Filter Files to only show audio
   function filterAudio() {
     setFilteredFiles(loadedFiles.filter((element: any) => element.type === "mp3"))
-    setFilteredFilesConfig("audio");
-    if (filteredFilesConfig === "audio") {
+    setFilteredFilesConfig("Audio");
+    if (filteredFilesConfig === "Audio") {
       setFilteredFiles(loadedFiles);
-      setFilteredFilesConfig("");
+      setFilteredFilesConfig("All Files");
     }
   }
 
-  console.log(filteredFilesConfig)
-
+  // Go To playlists
+  function goToPlaylists() {
+    setFilteredFilesConfig("Playlists");
+    if (filteredFilesConfig === "Playlists") {
+      setFilteredFilesConfig("All Files");
+    }
+    fetch(
+      "https://whizzy-software-default-rtdb.firebaseio.com/playlists.json"
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setLoadedPlaylists(data)
+      });
+  }
 
   if (isLoading) {
     return (
@@ -63,6 +85,7 @@ const MainBody = (props: any) => {
       </section>
     );
   }
+
   return (
     <>
       <div className="row bg-light">
@@ -74,19 +97,21 @@ const MainBody = (props: any) => {
         </div>
 
         {/* Filters */}
-        <div className="row p-0">
-          <div className="col-sm-3 p-0 ps-5 ms-3 pt-3">
-            <Filters />
+        <div className="row">
+          <div className="col-sm-2 p-0 ps-5 pt-3">
+            <Filters files={loadedFiles} />
           </div>
+
+
           {/* Main Body */}
           <div className="col p-0">
             <div>
 
               <div className="p-3 row">
                 <div className="col-10 d-flex">
-                  <h3 className="pe-4"><a href="#/" className="text-black" onClick={filterFootage}>Footage</a></h3>
-                  <h3 className="pe-4"><a href="#/" className="text-black" onClick={filterAudio}>Audio</a></h3>
-                  <h3 className="pe-4"><a href="#/" className="text-black">Your playlists</a></h3>
+                  <h3 className="pe-4"><Link className="text-dark" to="/footage" onClick={filterFootage}>Footage</Link></h3>
+                  <h3 className="pe-4"><Link className="text-dark" to="/audio" onClick={filterAudio}>Audio</Link></h3>
+                  <h3 className="pe-4"><Link className="text-dark" to="/playlists" onClick={goToPlaylists}>Your playlists</Link></h3>
 
                   <input
                     placeholder="Search"
@@ -109,10 +134,13 @@ const MainBody = (props: any) => {
                 </div>
               </div>
             </div>
-            <AllItems files={filteredFiles} />
+            {/* Display All Items */}
+            {filteredFilesConfig === "Playlists" ? <Playlists playlists={loadedPlaylists} /> : <AllItems files={filteredFiles} filter={filteredFilesConfig} />}
+
           </div>
         </div>
       </div>
+      {/* Footer */}
       <Footer></Footer>
     </>
   );

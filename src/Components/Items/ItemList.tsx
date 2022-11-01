@@ -13,7 +13,7 @@ const ItemList: React.FC<IItem> = (props: any) => {
 
   function openItem(id: number) {
     setItemSelected(true);
-    setSelectedItem(props.items.find((element: any) => element.id == id));
+    setSelectedItem(props.items.find((element: any) => element.id === id));
   }
 
   function closeItem() {
@@ -27,7 +27,7 @@ const ItemList: React.FC<IItem> = (props: any) => {
     <div>
       <ul className="list-unstyled d-flex">
         {highlightedFiles.map((item: any) => (
-          <li className="p-3" key={item.id}>
+          <li className="pe-3" key={item.id}>
             <button onClick={() => openItem(item.id)} className="border-0 bg-light">
               <Item
                 image={item.image.path}
@@ -37,10 +37,9 @@ const ItemList: React.FC<IItem> = (props: any) => {
           </li>
         ))}
       </ul>
-      <h3 className="ps-3">All Files:</h3>
       <ul className="list-unstyled d-flex flex-wrap">
         {files.map((item: any) => (
-          <li className="p-3 w-25" key={item.id}>
+          <li className="pe-3 py-2 w-25" key={item.id}>
             <button onClick={() => openItem(item.id)} className="border-0 bg-light">
               <Item image={item.image.path} title={item.name} time={item.time} comment={item.comment} type={item.type} id={item.id} />
             </button>

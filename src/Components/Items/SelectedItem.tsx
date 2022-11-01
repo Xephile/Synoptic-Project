@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import EditForm from "../Forms/EditForm";
 
 interface ISelectedItem {
@@ -26,7 +26,6 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
         ).then(() => {
             window.location.reload()
         });
-        console.log(props.id)
     }
 
     function editHandler() {
@@ -34,8 +33,8 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
     }
 
     function submitHandler(updatedFile: any) {
-        updatedFile.name = updatedFile.name == "" ? props.title : updatedFile.name
-        updatedFile.time = updatedFile.time == "" ? props.time : updatedFile.time
+        updatedFile.name = updatedFile.name === "" ? props.title : updatedFile.name
+        updatedFile.time = updatedFile.time === "" ? props.time : updatedFile.time
         fetch(
             `https://whizzy-software-default-rtdb.firebaseio.com/files/${props.id}.json`,
             {

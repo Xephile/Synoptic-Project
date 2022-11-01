@@ -14,7 +14,6 @@ const EditForm = (props: any) => {
             name: enteredTitle?.value,
             time: enteredTime?.value
         }
-        console.log(updatedFile);
         props.submitHandler(updatedFile);
     }
 

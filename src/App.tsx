@@ -9,6 +9,10 @@ function App(): JSX.Element {
     <Layout>
       <Routes>
         <Route element={<MainBody />} path="/" />
+        <Route element={<MainBody />} path="/playlists" />
+        <Route element={<MainBody />} path="/footage" />
+        <Route element={<MainBody />} path="/audio" />
+        <Route element={<MainBody />} path="/playlists/:name" />
       </Routes>
     </Layout>
   );
