@@ -5,6 +5,8 @@ import SelectedItem from "./SelectedItem";
 
 interface IItem {
   items: Array<any>;
+  searchTerm: any;
+  filterTerm: any;
 }
 
 const ItemList: React.FC<IItem> = (props: any) => {
@@ -20,35 +22,34 @@ const ItemList: React.FC<IItem> = (props: any) => {
     setItemSelected(false);
   }
 
-  let highlightedFiles = props.items.slice(0, 3);
-  let files = props.items.slice(3);
-
   return (
     <div>
-      <ul className="list-unstyled d-flex">
-        {highlightedFiles.map((item: any) => (
-          <li className="pe-3" key={item.id}>
+      {/* Map through items and filter if user searches */}
+      <ul className="list-unstyled d-flex flex-wrap row">
+        {props.items.filter((val: any) => {
+          if (props.searchTerm === "" && props.filterTerm.length === 0) {
+            return val
+          } else if
+            (props.filterTerm.includes(val.tags)) {
+            return val
+          } else if (props.searchTerm !== "" && props.filterTerm.includes(val.props) && val.name.toLowerCase().includes(props.searchTerm.toLowerCase())) {
+            return val
+          } else if (props.searchTerm !== "" && props.filterTerm.length === 0 && val.name.toLowerCase().includes(props.searchTerm.toLowerCase())) {
+            return val
+          }
+
+        }).map((item: any) => (
+          <li className="pe-4 py-2 col-4" key={item.id}>
             <button onClick={() => openItem(item.id)} className="border-0 bg-light">
-              <Item
-                image={item.image.path}
-                title={item.name}
-                time={item.time} comment={item.comment} type={item.type} id={item.id} />
+              <Item image={item.image.path} title={item.name} time={item.time} comment={item.comment} type={item.type} id={item.id} tags={item.tags} />
             </button>
           </li>
         ))}
       </ul>
-      <ul className="list-unstyled d-flex flex-wrap">
-        {files.map((item: any) => (
-          <li className="pe-3 py-2 w-25" key={item.id}>
-            <button onClick={() => openItem(item.id)} className="border-0 bg-light">
-              <Item image={item.image.path} title={item.name} time={item.time} comment={item.comment} type={item.type} id={item.id} />
-            </button>
-          </li>
-        ))}
-      </ul>
+      {/* If a user clicks an item, display that item */}
       {
         itemIsSelected && (
-          <SelectedItem image={selectedItem.image.path} title={selectedItem.name} time={selectedItem.time} comment={selectedItem.comment} type={selectedItem.type} id={selectedItem.id} />
+          <SelectedItem image={selectedItem.image.path} title={selectedItem.name} time={selectedItem.time} comment={selectedItem.comment} type={selectedItem.type} id={selectedItem.id} tags={selectedItem.tags} />
         )
       }
       {itemIsSelected && <Backdrop onCancel={closeItem} />}

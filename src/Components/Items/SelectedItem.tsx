@@ -8,6 +8,7 @@ interface ISelectedItem {
     comment: string;
     type: string;
     id: number;
+    tags: string;
 }
 
 const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
@@ -35,8 +36,11 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
     function submitHandler(updatedFile: any) {
         updatedFile.name = updatedFile.name === "" ? props.title : updatedFile.name
         updatedFile.time = updatedFile.time === "" ? props.time : updatedFile.time
+        updatedFile.type = updatedFile.type === "" ? props.type : updatedFile.type
+        updatedFile.tags = updatedFile.tags === "" ? props.tags : updatedFile.tags
+
         fetch(
-            `https://whizzy-software-default-rtdb.firebaseio.com/files/${props.id}.json`,
+            `https://whizzy-software-default-rtdb.firebaseio.com/files/${props.id - 1}.json`,
             {
                 method: "PATCH",
                 body: JSON.stringify(updatedFile),
@@ -53,13 +57,17 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
         <div className="selectedItem">
             <div id={props.id}>
                 <img className="w-100 " src={props.image} alt={props.comment} />
+                {!formIsLoaded && <div className="p-2 bg-secondary bg-gradient">
+                    <h6 className="ps-2 text-white">{props.tags}</h6>
+                </div>}
             </div>
 
             {formIsLoaded ? (
-                <EditForm submitHandler={submitHandler} title={props.title} time={props.time} />) : <div className="bg-light d-flex p-3">
+                <EditForm submitHandler={submitHandler} title={props.title} time={props.time} type={props.type} tags={props.tags} />) : <div className="bg-light d-flex p-3">
                 <div className="d-flex">
                     <h5 className="pe-5 border-end border-3 border-dark">{props.title}</h5>
-                    <h5 className="px-5">{props.time}</h5>
+                    <h5 className="px-5 border-end border-3 border-dark">{props.time}</h5>
+                    <h5 className="px-5">{props.type}</h5>
                 </div>
             </div>}
 

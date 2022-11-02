@@ -20,17 +20,18 @@ const Playlists: React.FC<IPlayLists> = (props: any) => {
     }
 
     return (<>
+        {/* If a playlist is not selected, show all playlists, if it is, show the files inside the playlist */}
         {selectedPlaylist.length === 0 ? <h3 className="ps-3">Your Playlists:</h3> : <h3 className="ps-3">{selectedPlaylist[0].playlistName}</h3>}
         <ul className="list-unstyled row">
             {selectedPlaylist.length === 0 ? (props.playlists.map((item: any) => (
                 <li className="col-4 mb-3 playlistItem" key={item.id}>
 
                     <Link className="text-black text-decoration-none" id={item.id} to={`/playlists`} onClick={() => onOpen(item)}>
-                        <Item image={item[1].image.path} title={item[0].playlistName} time={""} comment={item[1].comment} type={item[1].type} id={item[1].id} />
+                        <Item image={item[1].image.path} title={item[0].playlistName} time={""} comment={item[1].comment} type={item[1].type} id={item[1].id} tags={""} />
                     </Link>
                 </li>
 
-            ))) : <ItemList items={filteredPlaylist} />}
+            ))) : <ItemList items={filteredPlaylist} searchTerm="" filterTerm="" />}
 
         </ul>
     </>

@@ -1,7 +1,7 @@
 import Filters from "./Filters";
 import Footer from "./Footer";
 import AllItems from "../Components/Items/AllItems";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Playlists from "../Components/Playlists/Playlists";
 
@@ -11,6 +11,8 @@ const MainBody = () => {
   const [loadedPlaylists, setLoadedPlaylists] = useState<string[]>([]);
   const [filteredFiles, setFilteredFiles] = useState<string[]>([]);
   const [filteredFilesConfig, setFilteredFilesConfig] = useState("All Files");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterTerm, setFilterTerm] = useState<any[]>([]);
 
   // Get Data
   useEffect(() => {
@@ -59,7 +61,7 @@ const MainBody = () => {
     }
   }
 
-  // Go To playlists
+  // Go To playlists & get data
   function goToPlaylists() {
     setFilteredFilesConfig("Playlists");
     if (filteredFilesConfig === "Playlists") {
@@ -76,6 +78,7 @@ const MainBody = () => {
       });
   }
 
+  //Show loading screen when loading
   if (isLoading) {
     return (
       <section>
@@ -83,6 +86,7 @@ const MainBody = () => {
       </section>
     );
   }
+
 
   return (
     <>
@@ -96,8 +100,11 @@ const MainBody = () => {
 
         {/* Filters */}
         <div className="row">
-          <div className="col-sm-2 p-0 ps-5 pt-3">
-            <Filters files={loadedFiles} />
+          <div className="col-sm-3 p-0 ps-5 pt-3">
+            <Filters files={loadedFiles} onChange={(event: any) => {
+              setFilterTerm(event);
+              console.log(event);
+            }} />
           </div>
 
 
@@ -115,9 +122,9 @@ const MainBody = () => {
                     placeholder="Search"
                     type="text"
                     className="form-control form-control-sm w-25 me-2"
+                    onChange={event => { setSearchTerm(event.target.value) }}
                   />
 
-                  <button className="btn btn-dark px-4">Search</button>
                 </div>
                 <div className="col">
                   <select
@@ -133,7 +140,7 @@ const MainBody = () => {
               </div>
             </div>
             {/* Display All Items */}
-            {filteredFilesConfig === "Playlists" ? <Playlists playlists={loadedPlaylists} /> : <AllItems files={filteredFiles} filter={filteredFilesConfig} />}
+            {filteredFilesConfig === "Playlists" ? <Playlists playlists={loadedPlaylists} /> : <AllItems files={filteredFiles} filter={filteredFilesConfig} searchTerm={searchTerm} filterTerm={filterTerm} />}
 
           </div>
         </div>
