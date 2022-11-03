@@ -38,7 +38,6 @@ const MainBody = () => {
         setLoadedFiles(files);
         setFilteredFiles(files);
       });
-
     fetch("https://whizzy-software-default-rtdb.firebaseio.com/playlists.json")
       .then((response) => {
         return response.json();
@@ -49,6 +48,7 @@ const MainBody = () => {
           playlists.push(playlist);
         });
         setAvailablePlaylists(playlists);
+        setLoadedPlaylists(data);
       });
   }, []);
 
@@ -82,13 +82,6 @@ const MainBody = () => {
     if (filteredFilesConfig === "Playlists") {
       setFilteredFilesConfig("All Files");
     }
-    fetch("https://whizzy-software-default-rtdb.firebaseio.com/playlists.json")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setLoadedPlaylists(data);
-      });
   }
 
   //Show loading screen when loading
@@ -120,7 +113,7 @@ const MainBody = () => {
               files={loadedFiles}
               onChange={(event: any) => {
                 setFilterTerm(event);
-                console.log(event);
+                // console.log(event);
               }}
             />
           </div>

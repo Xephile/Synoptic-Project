@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Backdrop from "../Backdrop";
 import Item from "./Item";
 import SelectedItem from "./SelectedItem";
@@ -13,6 +13,8 @@ interface IItem {
 const ItemList: React.FC<IItem> = (props: any) => {
   const [itemIsSelected, setItemSelected] = useState(false);
   let [selectedItem, setSelectedItem] = useState<any>([]);
+
+  useEffect(() => {}, [props.filterTerm]);
 
   function openItem(id: number) {
     setItemSelected(true);

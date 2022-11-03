@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Filters = (props: any) => {
   const [selectedFilters, setSelectedFilters] = useState<any[]>([]);
   // Get all of the tags available
   var allTags = props.files.map((file: any) => file.tags);
-  var availableTags = allTags.filter((v: any, i: any, a: any) => a.indexOf(v) === i);
+  var availableTags = allTags.filter(
+    (v: any, i: any, a: any) => a.indexOf(v) === i
+  );
+
+  useEffect(() => {
+    props.onChange(selectedFilters);
+  }, [selectedFilters]);
 
   //Display the tags
   return (
@@ -16,17 +22,28 @@ const Filters = (props: any) => {
         <ul className="list-group p-2 list-unstyled">
           {availableTags.map((tag: any) => (
             <li key={tag}>
-              <input type="checkbox" id={tag} className="form-check-input" onChange={event => {
-
-                if (selectedFilters.includes(event.target.id)) {
-                  let index = selectedFilters.indexOf(event.target.id);
-                  selectedFilters.splice(index, 1)
-                } else {
-                  selectedFilters.push(event.target.id)
-                }
-                props.onChange(selectedFilters)
-
-              }} />
+              <input
+                type="checkbox"
+                id={tag}
+                className="form-check-input"
+                onChange={(event) => {
+                  if (selectedFilters.includes(event.target.id)) {
+                    setSelectedFilters((current) =>
+                      current.filter((name: any) => name !== event.target.id)
+                    );
+                  } else if (
+                    selectedFilters.includes(event.target.id) &&
+                    selectedFilters.length === 1
+                  ) {
+                    setSelectedFilters([]);
+                  } else {
+                    setSelectedFilters((selectedFilters) => [
+                      ...selectedFilters,
+                      event.target.id,
+                    ]);
+                  }
+                }}
+              />
               <label htmlFor={tag} className="px-2">
                 <h5>{tag}</h5>
               </label>
@@ -34,7 +51,7 @@ const Filters = (props: any) => {
           ))}
         </ul>
       </div>
-    </section >
+    </section>
   );
 };
 
