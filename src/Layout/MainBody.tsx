@@ -122,28 +122,28 @@ const MainBody = () => {
           <div className="col p-0">
             <div>
               <div className="p-3 row">
-                <div className="col-10 d-flex">
-                  <h3 className="pe-4">
+                <div className="col-10 d-flex ">
+                  <h3 className="pe-4 linkHover">
                     <Link
-                      className="text-dark"
+                      className="linkHover"
                       to="/footage"
                       onClick={filterFootage}
                     >
                       Footage
                     </Link>
                   </h3>
-                  <h3 className="pe-4">
+                  <h3 className="pe-4 linkHover">
                     <Link
-                      className="text-dark"
+                      className="linkHover"
                       to="/audio"
                       onClick={filterAudio}
                     >
                       Audio
                     </Link>
                   </h3>
-                  <h3 className="pe-4">
+                  <h3 className="pe-4 linkHover">
                     <Link
-                      className="text-dark"
+                      className="linkHover"
                       to="/playlists"
                       onClick={goToPlaylists}
                     >
