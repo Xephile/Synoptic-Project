@@ -14,8 +14,6 @@ const ItemList: React.FC<IItem> = (props: any) => {
   const [itemIsSelected, setItemSelected] = useState(false);
   let [selectedItem, setSelectedItem] = useState<any>([]);
 
-  useEffect(() => {}, [props.filterTerm]);
-
   function openItem(id: number) {
     setItemSelected(true);
     setSelectedItem(props.items.find((element: any) => element.id === id));
@@ -31,19 +29,20 @@ const ItemList: React.FC<IItem> = (props: any) => {
       <ul className="list-unstyled row">
         {props.items
           .filter((val: any) => {
+            //Return all values if either terms are empty
             if (props.searchTerm === "" && props.filterTerm.length === 0) {
               return val;
-            } else if (props.filterTerm.includes(val.tags)) {
-              return val;
-            } else if (
-              props.searchTerm !== "" &&
-              props.filterTerm.includes(val.props) &&
+            }
+            //return values that match filter term with empty search term
+            else if (
+              props.filterTerm.includes(val.tags) &&
               val.name.toLowerCase().includes(props.searchTerm.toLowerCase())
             ) {
               return val;
-            } else if (
+            }
+            //return values that match both search term and filter term
+            else if (
               props.searchTerm !== "" &&
-              props.filterTerm.length === 0 &&
               val.name.toLowerCase().includes(props.searchTerm.toLowerCase())
             ) {
               return val;
