@@ -8,8 +8,10 @@ const Filters = (props: any) => {
     (v: any, i: any, a: any) => a.indexOf(v) === i
   );
 
+
   useEffect(() => {
     props.onChange(selectedFilters);
+    // eslint-disable-next-line
   }, [selectedFilters]);
 
   //Display the tags

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import EditForm from "../Forms/EditForm";
 
 interface ISelectedItem {
@@ -46,8 +46,7 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
     updatedFile.type = updatedFile.type === "" ? props.type : updatedFile.type;
     updatedFile.tags = updatedFile.tags === "" ? props.tags : updatedFile.tags;
     fetch(
-      `https://whizzy-software-default-rtdb.firebaseio.com/files/${
-        props.id - 1
+      `https://whizzy-software-default-rtdb.firebaseio.com/files/${props.id - 1
       }.json`,
       {
         method: "PATCH",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Backdrop from "../Backdrop";
 import Item from "./Item";
 import SelectedItem from "./SelectedItem";
@@ -47,6 +47,7 @@ const ItemList: React.FC<IItem> = (props: any) => {
             ) {
               return val;
             }
+            return val
           })
           .map((item: any) => (
             <li className="pe-4 py-2 col-4" key={item.id}>

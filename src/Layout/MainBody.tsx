@@ -22,6 +22,7 @@ const MainBody = () => {
       .then((response) => {
         return response.json();
       })
+      // eslint-disable-next-line
       .then((data) => {
         let files = [];
 
@@ -44,6 +45,7 @@ const MainBody = () => {
       })
       .then((data) => {
         let playlists: any[] = [];
+        // eslint-disable-next-line
         data.map((playlist: any) => {
           playlists.push(playlist);
         });

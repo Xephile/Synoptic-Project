@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import ItemList from "./ItemList";
 
 interface IAllItems {
