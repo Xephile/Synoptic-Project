@@ -4,6 +4,8 @@ import AllItems from "../Components/Items/AllItems";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Playlists from "../Components/Playlists/Playlists";
+import Backdrop from "../Components/Backdrop";
+import AddFileForm from "../Components/Forms/AddFileForm";
 
 const MainBody = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,6 +16,7 @@ const MainBody = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterTerm, setFilterTerm] = useState<any[]>([]);
   const [availablePlaylists, setAvailablePlaylists] = useState<any[]>([]);
+  const [formIsOpen, setFormOpen] = useState(false);
 
   // Get Data
   useEffect(() => {
@@ -25,13 +28,11 @@ const MainBody = () => {
       // eslint-disable-next-line
       .then((data) => {
         let files = [];
-
         for (const key in data) {
           const file = {
             id: key,
             ...data[key],
           };
-          if (typeof file.id === "string") continue;
           files.push(file);
         }
 
@@ -86,6 +87,28 @@ const MainBody = () => {
     }
   }
 
+  //Add files
+  function addFileHandler() {
+    setFormOpen(true);
+  }
+  function closeItem() {
+    setFormOpen(false);
+  }
+
+  function submitFiles(file: any) {
+    fetch("https://whizzy-software-default-rtdb.firebaseio.com/files.json", {
+      method: "POST",
+      body: JSON.stringify(file),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      return response.json();
+    }).then(() => {
+      window.location.reload();
+    })
+  }
+
   //Show loading screen when loading
   if (isLoading) {
     return (
@@ -115,7 +138,6 @@ const MainBody = () => {
               files={loadedFiles}
               onChange={(event: any) => {
                 setFilterTerm(event);
-                // console.log(event);
               }}
             />
           </div>
@@ -161,6 +183,9 @@ const MainBody = () => {
                       setSearchTerm(event.target.value);
                     }}
                   />
+
+                  <button className="btn btn-info" onClick={addFileHandler}><b>Add File</b></button>
+
                 </div>
                 <div className="col">
                   <select
@@ -173,6 +198,8 @@ const MainBody = () => {
                     <option value="relevance">Relevance</option>
                   </select>
                 </div>
+                {formIsOpen && <AddFileForm submitFormHandler={submitFiles} />}
+                {formIsOpen && <Backdrop onCancel={closeItem} />}
               </div>
             </div>
             {/* Display All Items */}
