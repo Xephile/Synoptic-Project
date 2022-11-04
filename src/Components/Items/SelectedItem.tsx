@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Route } from "react-router-dom";
 import EditForm from "../Forms/EditForm";
 
 interface ISelectedItem {
@@ -18,7 +19,7 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
 
   function deleteHandler() {
     fetch(
-      `https://whizzy-software-default-rtdb.firebaseio.com/files/${props.id}.json`,
+      `https://whizzy-software-default-rtdb.firebaseio.com/files/${props.id - 1}.json`,
       {
         method: "DELETE",
         body: JSON.stringify(props),
@@ -56,6 +57,7 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
         },
       }
     ).then(() => {
+      <Route path="/" />
       window.location.reload();
     });
   }

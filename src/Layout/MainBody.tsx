@@ -31,7 +31,7 @@ const MainBody = () => {
             id: key,
             ...data[key],
           };
-          if (file.name === null) continue;
+          if (typeof file.id === "string") continue;
           files.push(file);
         }
 
