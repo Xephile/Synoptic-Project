@@ -28,6 +28,7 @@ const ItemList: React.FC<IItem> = (props: any) => {
       {/* Map through items and filter if user searches */}
       <ul className="list-unstyled row">
         {props.items
+          // eslint-disable-next-line
           .filter((val: any) => {
             //Return all values if either terms are empty
             if (props.searchTerm === "" && props.filterTerm.length === 0) {
@@ -47,7 +48,6 @@ const ItemList: React.FC<IItem> = (props: any) => {
             ) {
               return val;
             }
-            return val
           })
           .map((item: any) => (
             <li className="pe-4 py-2 col-4" key={item.id}>
