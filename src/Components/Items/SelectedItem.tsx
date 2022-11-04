@@ -19,7 +19,7 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
 
   function deleteHandler() {
     fetch(
-      `https://whizzy-software-default-rtdb.firebaseio.com/files/${props.id - 1}.json`,
+      `https://whizzy-software-default-rtdb.firebaseio.com/files/${props.id}.json`,
       {
         method: "DELETE",
         body: JSON.stringify(props),
@@ -46,9 +46,9 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
     updatedFile.time = updatedFile.time === "" ? props.time : updatedFile.time;
     updatedFile.type = updatedFile.type === "" ? props.type : updatedFile.type;
     updatedFile.tags = updatedFile.tags === "" ? props.tags : updatedFile.tags;
+
     fetch(
-      `https://whizzy-software-default-rtdb.firebaseio.com/files/${props.id - 1
-      }.json`,
+      `https://whizzy-software-default-rtdb.firebaseio.com/files/${props.id}.json`,
       {
         method: "PATCH",
         body: JSON.stringify(updatedFile),
@@ -64,6 +64,7 @@ const SelectedItem: React.FC<ISelectedItem> = (props: any) => {
 
   function addToPlaylistHandler() {
     //Cannot add to playlist databse as firebase doesn't index things properly meaning I can't insert data from the api and display it after
+
     window.location.reload();
   }
 
