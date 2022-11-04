@@ -156,7 +156,7 @@ const MainBody = () => {
                       onClick={filterAudio}> <u>Audio</u></button>
                   </h3>
                   <h3 className="pe-4 linkHover">
-                    <button className="linkHover border-0 bg-transparent text-"
+                    <button className="linkHover border-0 bg-transparent"
                       onClick={goToPlaylists}> <u>Your playlists</u></button>
                   </h3>
 

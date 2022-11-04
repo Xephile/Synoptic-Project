@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Item from "../Items/Item";
 import ItemList from "../Items/ItemList";
 
@@ -19,7 +18,6 @@ const Playlists: React.FC<IPlayLists> = (props: any) => {
     filteredPlaylist.push(selectedPlaylist[i]);
   }
 
-  console.log(selectedPlaylist[7]);
   return (
     <>
       {/* If a playlist is not selected, show all playlists, if it is, show the files inside the playlist */}
@@ -32,12 +30,10 @@ const Playlists: React.FC<IPlayLists> = (props: any) => {
         {selectedPlaylist.length === 0 ? (
           props.playlists.map((item: any) => (
             <li className="col-4 mb-3" key={item[1].id}>
-              <Link
-                className="text-black text-decoration-none"
+              <button className="text-black text-decoration-none border-0 bg-transparent"
                 id={item.id}
-                to={`/playlists`}
-                onClick={() => onOpen(item)}
-              >
+                onClick={() => onOpen(item)}>
+
                 <Item
                   image={item[1].image.path}
                   title={item[0].playlistName}
@@ -47,7 +43,7 @@ const Playlists: React.FC<IPlayLists> = (props: any) => {
                   id={item[1].id}
                   tags={""}
                 />
-              </Link>
+              </button>
             </li>
           ))
         ) : (
