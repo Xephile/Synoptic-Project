@@ -2,7 +2,6 @@ import Filters from "./Filters";
 import Footer from "./Footer";
 import AllItems from "../Components/Items/AllItems";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Playlists from "../Components/Playlists/Playlists";
 import Backdrop from "../Components/Backdrop";
 import AddFileForm from "../Components/Forms/AddFileForm";
@@ -148,31 +147,17 @@ const MainBody = () => {
               <div className="p-3 row">
                 <div className="col-10 d-flex ">
                   <h3 className="pe-4 linkHover">
-                    <Link
-                      className="linkHover"
-                      to="/footage"
-                      onClick={filterFootage}
-                    >
-                      Footage
-                    </Link>
+
+                    <button className="linkHover border-0 bg-transparent text-"
+                      onClick={filterFootage}> <u>Footage</u></button>
                   </h3>
                   <h3 className="pe-4 linkHover">
-                    <Link
-                      className="linkHover"
-                      to="/audio"
-                      onClick={filterAudio}
-                    >
-                      Audio
-                    </Link>
+                    <button className="linkHover border-0 bg-transparent text-"
+                      onClick={filterAudio}> <u>Audio</u></button>
                   </h3>
                   <h3 className="pe-4 linkHover">
-                    <Link
-                      className="linkHover"
-                      to="/playlists"
-                      onClick={goToPlaylists}
-                    >
-                      Your playlists
-                    </Link>
+                    <button className="linkHover border-0 bg-transparent text-"
+                      onClick={goToPlaylists}> <u>Your playlists</u></button>
                   </h3>
 
                   <input
